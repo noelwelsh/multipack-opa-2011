@@ -1,0 +1,86 @@
+#+TITLE: Opa in 15 Mins
+* Introduction
+  [[http://opalang.org/][Opa]] is new language for web development, from MLState in France. We spent an afternoon looking at Opa, and this is what we learned.
+* Summary
+  - Opa is very productive
+  - Fairly simple to get started with
+  - Lacks libraries, and needs some runtime improvements for particular cases
+  - (Opa is a structurally typed language based on the join calculus, implemented in O'Caml.)
+* Example
+  <Example here>
+* Three Themes
+  Opa is best viewed as an embodiment of the ideals of the revolution:
+  - Liberty
+  - Equality
+  - Fraternity
+* Equality
+  - One language for web development that runs on the client and the server.
+  - Channels
+  - Transparent scalability
+** One Language
+   The same language can run on the server or browser.
+   <Example>
+** Slicing and Dicing
+   - The slicer decides where to put code.
+   - Code can run on browser, server, or both.
+   - Access control as well
+   - You can add annotations to control this
+   - Can have performance implications
+** Communication
+   How do browser and server communicate?
+
+   The basic mechanism is message-passing. 
+   - A *channel* is an end-point for communication
+   - You can send anything to a channel
+   - A message handler in the channel does whatever is appropriate
+   - Cloud abstraction for multicast
+** Channel Example
+   <example here>
+** Transparent Scalability
+   - Run with =opa-cloud= instead of =opa=
+   - Stick HAProxy in front of your machines
+   - Have to specify number of machines in advance
+   - Machine crashes can lose state (if you don't serialise to DB)
+* Liberty
+  - Static dynamic type system (structural types)
+  - Cruft-free
+  - Consistency
+** Duck Typing
+   Maybe you've heard of "duck typing"?
+
+   "When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck."
+
+   In dynamic typed languages: if this object has all the methods I call, it is of the type I want.
+** Structural Typing
+   Opa is statically typed but with a twist.
+   
+   Opa is structurally typed. Types are compared not by names given to types, but by the properties (or structure) of the types. 
+   
+   Everything in Opa is an integer, float, string, function, or structure. A structure is a map from names to values, just like a Javascript object.
+   
+   Programming in Opa is like programming Javascript, except your errors are caught at compile-time.
+** Structural Typing Example
+   <Example>
+** Cruft-free
+   There isn't much ceremony in Opa. You can create a complete web-app in one file (including HTML) if you want to. You can run a web server with one line of code. You don't need anything in the way of configuration.
+** Consistency
+   Opa abstracts away a lot of the cruft of web development (think: Internet Explorer). For example, consistent DOM manipulation, consistent event handling, etc.
+* Fraternity
+  - External Libraries
+  - External Datastores
+  - Identification with the common man
+** Using External Libraries
+   Opa has an FFI to Javascript and O'Caml. (O'Caml is the language in which Opa is implemented. From O'Caml you can call out to C, for example.)
+
+   It's a bit of a pain to use, requiring a separate compilation step.
+** External Datastores
+   Opa comes with a simple built-in DB, but most people will want to integrate with some other datastore.
+
+   Opa doesn't have any particular support for external datastores. (You can open a socket and talk the DB's protocol if you want, but that's about it.) Something is being worked on, but it isn't available yet.
+** The Common Man
+   No discussion of the French is complete without out discussing their penchant for downing tools.
+
+   Opa is no different. The compiler can take literally minutes to run, which gets a bit annoying. It caches files, most compilation will be fast, but full compiles are still an issue
+* Resources
+  opalang.org
+  https://github.com/untyped/Opavo
